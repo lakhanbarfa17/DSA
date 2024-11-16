@@ -5,10 +5,7 @@ import java.util.Queue;
 
 import javax.management.Query;
 
-/*
- * Build Tree from given Preorder Sequence
- * {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1}
-*/
+
 
 public class TreeTraversal {
 
@@ -105,6 +102,27 @@ public class TreeTraversal {
 			}
 		}
 	}
+	
+	public static int countOfNodes(Node root) {
+		if(root == null) return 0;
+		
+		int leftCount = countOfNodes(root.left);
+		int rightCount = countOfNodes(root.right);
+		
+		return leftCount + rightCount + 1;
+	}
+	
+	public static int sumOfNodes(Node root) {
+		if(root == null) return 0;
+		
+		return sumOfNodes(root.left) + sumOfNodes(root.right) + root.data;
+	}
+	
+	public static int height(Node root) {
+		if(root == null) return 0;
+		
+		return Math.max(height(root.left), height(root.right)) + 1;
+	}
 
 	public static void main(String[] args) {
 		int[] nodes = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
@@ -124,5 +142,14 @@ public class TreeTraversal {
 
 		System.out.println("levelorder");
 		levelorder(root);
+		
+		int count = countOfNodes(root);
+		System.out.println("countOfNodes : " + count);
+		
+		int sum = sumOfNodes(root);
+		System.out.println("sumOfNodes : " + sum);
+		
+		int height = height(root);
+		System.out.println("height of tree : "+ height);
 	}
 }
